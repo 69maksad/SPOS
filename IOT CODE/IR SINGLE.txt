@@ -1,0 +1,22 @@
+import RPi.GPIO as IO
+import time
+
+# Set up the GPIO pins
+IO.setwarnings(False)
+IO.setmode(IO.BCM)
+
+IO.setup(2, IO.OUT)  # GPIO 2 - LED as output
+IO.setup(14, IO.IN)   # GPIO 14 - IR sensor as input
+
+try
+    while True
+        if IO.input(14)  # Object is far away
+            IO.output(2, False)  # LED OFF
+        else  # Object is near
+            IO.output(2, True)  # LED ON
+        
+        time.sleep(0.1)  # Small delay to reduce CPU usage
+
+except KeyboardInterrupt
+    # Clean up GPIO settings before exiting
+    IO.cleanup()
